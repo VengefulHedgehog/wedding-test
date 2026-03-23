@@ -1,0 +1,48 @@
+/* ===== Шрифты ===== */
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('/fonts/lc_chalk.woff2') format('woff2'),
+       url('/fonts/lc_chalk.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== Переменные ===== */
+:root {
+  --primary: #b82d0d;
+  --secondary: #f7f7f7;
+  --text: #b62c08;
+  --accent: #b82d0d;
+  --white: #ffffff;
+}
+
+/* ===== Сброс ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Базовые стили ===== */
+body {
+  font-family: 'MyCustomFont', serif;
+  color: var(--text);
+  background: var(--secondary);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===== Приложение ===== */
+.app {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}

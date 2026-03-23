@@ -1,0 +1,427 @@
+/* ===== Цельная страница ===== */
+.details-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 60px;
+    background: var(--secondary);
+}
+
+/* ===== Общие стили секций ===== */
+.section {
+    padding: 40px 20px;
+}
+
+/* Главное фото */
+.main-photo-section {
+    padding: 0 !important;
+    margin: 0 -10px;
+}
+
+.main-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+}
+
+.couple-section {
+    padding-top: 0 !important;
+    text-align: center;
+}
+
+.couple-photos {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Выравнивание по нижней линии */
+    gap: 0; /* 👈 Убираем отступ — наложение сделаем через отрицательный margin */
+    margin-bottom: 30px;
+    flex-wrap: nowrap;
+    
+    /* 👇 Если фото не вмещаются — показываем горизонтальный скролл */
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 10px 20px; /* 👈 Отступы для скролла, чтобы не обрезались тени/бордеры */
+    scroll-snap-type: x mandatory; /* 👈 Опционально: плавная прокрутка */
+    
+    /* 👇 Скрываем скроллбар для эстетики (работает в WebKit) */
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;
+}
+
+.couple-photo {
+    width: 220px;  /* 👈 Увеличили: было 180px */
+    height: 300px;
+    object-fit: cover;
+    object-position: top; /* Чтобы лица не обрезались */
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+/* 👈 Первое фото сдвигается вправо и получает нижний слой */
+.couple-photos .couple-photo:first-child {
+    border-radius: 40px 40px 0 40px;
+    margin-right: -50px; /* 👈 Наложение: фото "наезжают" друг на друга */
+    z-index: 1;
+}
+
+/* 👈 Второе фото поверх первого */
+.couple-photos .couple-photo:last-child {
+    border-radius: 40px 0 60px 40px;
+    z-index: 2;
+}
+
+/* 👈 Опционально: лёгкий ховер-эффект для интерактива */
+.couple-photo:hover {
+    transform: translateY(-4px);
+    z-index: 3 !important;
+}
+
+.couple-names {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin: 0;
+    position: relative;
+    z-index: 0; /* Чтобы текст был поверх фото при наложении */
+}
+.couple-photos-wrapper {
+    position: relative;
+    display: inline-block; /* Чтобы обёртка сжималась под контент */
+    margin: 0 auto 30px;   /* Центрируем и отступ снизу */
+}
+.couple-names {
+    font-size: 3.2rem;
+    color: var(--primary);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.couple-names .name-first,
+.couple-names .name-second {
+    font-weight: 500;
+}
+/* 👇 Блок с датой поверх фото */
+.couple-date-btn.next-btn {
+    position: absolute;
+    bottom: 0px !important;
+    transform: translateX(-50%); /* 👈 Центрирование по горизонтали */
+    padding: 20px !important;
+    font-size: 1.8rem !important;
+    white-space: nowrap;
+    z-index: 10;           /* Поверх фото и наложения */
+    
+    /* Опционально: лёгкая анимация при наведении */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;       /* Если это не кликабельный элемент */
+}
+
+.couple-date-btn.next-btn:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+/* Приветствие */
+.greeting-section {
+    text-align: center;
+}
+
+.greeting-section h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.greeting-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Дата */
+.date-section {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.date-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.date-numbers .dot {
+    font-size: 2rem;
+    align-self: center;
+    color: var(--accent);
+}
+
+/* Календарь */
+.calendar-section {
+    text-align: center;
+}
+
+.calendar-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Место проведения */
+.venue-section {
+    text-align: center;
+}
+
+.venue-section h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.venue-name {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.venue-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    background: var(--white);
+}
+
+.venue-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.map-marker {
+    font-size: 1.3rem;
+}
+
+/* Тайминг */
+.timeline-section {
+    text-align: center;
+}
+
+.timeline-section h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 30px;
+}
+
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+.timeline-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.timeline-item span {
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.timeline-item strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Дресс-код */
+.dresscode-section {
+    text-align: center;
+}
+
+.dresscode-section h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.dresscode-section p {
+    line-height: 1.7;
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto 15px;
+}
+
+/* Детали */
+.details-section {
+    text-align: center;
+}
+
+.details-section h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.details-section p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.details-section ul {
+    margin: 20px auto;
+    padding-left: 0;
+    list-style: none;
+    max-width: 600px;
+    text-align: left;
+}
+
+.details-section li {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    padding-left: 24px;
+    position: relative;
+}
+
+.details-section li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-size: 1.4rem;
+    top: -2px;
+}
+
+.telegram-btn {
+    display: inline-block;
+    margin: 25px auto 0;
+    max-width: 300px;
+    text-decoration: none;
+}
+
+/* Анкета гостя */
+.rsvp-section {
+    border: 3px solid var(--text);
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.rsvp-section h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.rsvp-section p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.rsvp-date {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 25px 0 !important;
+}
+
+/* Завершающий блок */
+.closing-section {
+    text-align: center;
+    padding: 60px 20px 40px;
+}
+
+.closing-text {
+    font-size: 1.4rem;
+    line-height: 2;
+    margin-bottom: 30px;
+    font-style: italic;
+    color: var(--text);
+}
+
+.closing-photo {
+    max-width: 400px;
+    height: auto;
+}
+
+/* ===== Адаптив ===== */
+@media (max-width: 600px) {
+    .details-page {
+        padding: 0;
+    }
+    .couple-photos-wrapper {
+        width: 100%;
+        max-width: 360px; /* Ограничиваем ширину обёртки */
+    }
+    
+    .couple-date-btn.next-btn {
+        bottom: 15px;
+        font-size: 1rem;
+        padding: 10px 24px;
+    }
+    .section {
+        padding: 30px 0; /* 👈 Только вертикальные отступы */
+    }
+
+    .couple-photos {
+        gap: 0;
+    }
+    .closing-photo{
+        max-width: 320px
+    }
+    .couple-photo {
+        width: 200px;
+        height: 300px;
+    }
+
+    .couple-photos .couple-photo:first-child {
+        height: 250px;
+        margin-right: -50px;
+    }
+
+    .couple-names {
+        margin-top: 10px;
+    }
+
+    .date-numbers {
+        font-size: 2.2rem;
+    }
+
+    .date-numbers .dot {
+        font-size: 1.6rem;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 15px 0; /* 👈 Убрали горизонтальный паддинг */
+    }
+
+    .timeline-item span {
+        text-align: center;
+    }
+}

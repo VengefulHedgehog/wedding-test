@@ -1,0 +1,33 @@
+.next-btn,
+.back-btn {
+    width: 100%;
+    padding: 20px;
+    margin: 20px 0;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: 'MyCustomFont', serif;
+    transition: background 0.3s;
+    border-radius: 50%;
+}
+
+.next-btn:hover,
+.back-btn:hover {
+    background: #c49595;
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    width: auto;
+    padding: 8px 16px;
+    font-size: 1rem;
+}
+
+.back-btn:hover {
+    background: rgba(184, 45, 13, 0.1);
+}
