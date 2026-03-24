@@ -1,14 +1,32 @@
 // src/App.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Step } from './types';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import DetailsScreen from './components/DetailsScreen/DetailsScreen';
 import RsvpScreen from './components/RsvpScreen/RsvpScreen';
+import { preloadImages } from './utils/imagePreloader';
 import './index.css';
 
 function App() {
   const [step, setStep] = useState<Step>(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Предзагрузка изображений при монтировании компонента
+    preloadImages()
+      .then((result) => {
+        console.log('Images preloaded:', result.loaded.length);
+        if (result.failed.length > 0) {
+          console.warn('Failed to preload images:', result.failed);
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error preloading images:', error);
+        setIsLoading(false);
+      });
+  }, []);
 
   const handleNext = () => {
     setStep((prev) => Math.min(prev + 1, 2) as Step);
@@ -17,6 +35,16 @@ function App() {
   const handleBack = () => {
     setStep((prev) => Math.max(prev - 1, 0) as Step);
   };
+
+  if (isLoading) {
+    return (
+      <div className="app loading-screen">
+        <div className="loading-content">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="app">

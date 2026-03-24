@@ -1,7 +1,35 @@
 import { motion, Variants } from 'framer-motion';
 import { ScreenProps } from '../../types';
 import './DetailsScreen.css';
-
+const DecorativeHearts = ({ position = 'top-right', type = 1 }) => {
+    const hearts = [
+        '/images/heart.jpg',      // тип 1
+        '/images/heartarrow.jpg', // тип 2
+        '/images/hearts.jpg'      // тип 3
+    ];
+    
+    const randomSpeed = 0.9 + Math.random() * 0.2;
+    
+    return (
+        <motion.img
+            src={hearts[type - 1] || hearts[0]}
+            alt="✦"
+            className={`decor-heart decor-${position}`}
+            
+            initial={{ scale: 1 }}
+            animate={{ 
+                scale: [1, 1.3, 1, 1.15, 1],
+            }}
+            transition={{ 
+                duration: 0.8 * randomSpeed,
+                times: [0, 0.15, 0.3, 0.45, 1],
+                repeat: Infinity, 
+                repeatType: "loop",
+                ease: "easeOut",
+            }}
+        />
+    );
+};
 interface DetailsScreenProps extends ScreenProps {
     onBack: () => void;
     onNext: () => void;
@@ -54,29 +82,77 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
                     <br />
                     <span className="name-second">Лилия</span>
                 </motion.h2>
-                <div className="couple-photos-wrapper"> {/* 👈 Новая обёртка для позиционирования */}
+                
+                <div className="couple-photos-wrapper">
                     <div className="couple-photos">
-                        <motion.img 
-                            src="/images/jenya.jpg" 
-                            alt="Евгений" 
-                            className="couple-photo"
-                            initial={{ opacity: 0, x: -40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        />
-                        <motion.img 
-                            src="/images/lilya.jpg" 
-                            alt="Лилия" 
-                            className="couple-photo"
-                            initial={{ opacity: 0, x: 40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                        />
+                        {/* 👇 Левое фото: Жених */}
+                        <div style={{ position: 'relative' }}>
+                            <motion.img 
+                                src="/images/jenya.jpg" 
+                                alt="Евгений" 
+                                className="couple-photo"
+                                initial={{ opacity: 0, x: -40 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6 }}
+                            />
+                            {/* Подпись "жених" с дугой и стрелкой */}
+                            <motion.div 
+                                className="curved-label left"
+                                initial={{ opacity: 0, y: -10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.4 }}
+                            >
+                                <img 
+                                    src="/images/arrow.jpg" 
+                                    alt="→" 
+                                    className="label-icon left"
+                                    style={{ '--rot': '-15deg' } as React.CSSProperties}
+                                />
+                                <div className="curved-text">
+                                    {'жених'.split('').map((char, i) => (
+                                        <span key={i}>{char}</span>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        {/* 👇 Правое фото: Невеста */}
+                        <div style={{ position: 'relative' }}>
+                            <motion.img 
+                                src="/images/lilya.jpg" 
+                                alt="Лилия" 
+                                className="couple-photo"
+                                initial={{ opacity: 0, x: 40}}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6}}
+                            />
+                            {/* Подпись "невеста" с дугой и стрелкой */}
+                            <motion.div 
+                                className="curved-label right"
+                                initial={{ opacity: 0, y: -10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.4 }}
+                            >
+                                <div className="curved-text">
+                                    {'невеста'.split('').map((char, i) => (
+                                        <span key={i}>{char}</span>
+                                    ))}
+                                </div>
+                                <img 
+                                    src="/images/arrowcircle.jpg" 
+                                    alt="↻" 
+                                    className="label-icon right"
+                                    style={{ '--rot': '15deg' } as React.CSSProperties}
+                                />
+                            </motion.div>
+                        </div>
                     </div>
                     
-                    {/* 👇 Блок с датой поверх фото */}
+                    {/* Блок с датой поверх фото */}
                     <motion.div 
                         className="couple-date-btn next-btn"
                         initial={{ opacity: 0, y: 20 }}
@@ -91,6 +167,7 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
 
             {/* Приветствие */}
             <motion.section className="section greeting-section" variants={fadeInUp}>
+                <DecorativeHearts position="top-right" type={1} />
                 <h3>Дорогие наши друзья и родные !</h3>
                 <p>Это официальное приглашение на нашу свадьбу !<br />
                 А получили вы его, потому что мы очень хотим видеть вас в этот день рядом с нами !</p>
@@ -98,6 +175,9 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
 
             {/* Дата */}
             <motion.section className="section date-section" variants={fadeInUp}>
+
+                
+                <DecorativeHearts position="top-left" type={3} />
                 <div className="date-numbers">
                     <span>15</span>
                     <span className="dot">•</span>
@@ -105,6 +185,7 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
                     <span className="dot">•</span>
                     <span>26</span>
                 </div>
+                <DecorativeHearts position="bottom-right" type={2} />
             </motion.section>
 
             {/* Календарь */}
@@ -115,20 +196,46 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
             {/* Место проведения */}
             <motion.section className="section venue-section" variants={fadeInUp}>
                 <h3>Место проведения</h3>
+                
+                {/* 👇 Логотип бара */}
+                <motion.img 
+                    src="/images/kul.jpg" 
+                    alt="Кул" 
+                    className="venue-logo"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                />
+                
                 <p className="venue-name">Бар-ресторан "Кул"</p>
+                
                 <a 
                     href="https://yandex.ru/maps/org/kul/119246599550?si=c0qbzjm4jve6qey3f28r8gd1qw"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="venue-link"
                 >
-                    <span className="map-marker">📍</span>
-                    <span>Чернышевского, 9</span>
+                    <span className="venue-address">* Чернышевского, 9 *</span>
+                    
+                    {/* Подсказка со стрелкой */}
+                    <span className="venue-map-hint">
+                        <img 
+                            src="/images/arrow.jpg" 
+                            alt="→" 
+                            className="hint-arrow"
+                        />
+                        <span className="hint-text">посмотреть место на карте</span>
+                    </span>
                 </a>
             </motion.section>
 
             {/* Тайминг */}
             <motion.section className="section timeline-section" variants={fadeInUp}>
+                
+                <DecorativeHearts position="top-left" type={3} />
+                <DecorativeHearts position="right" type={2} />
+                <DecorativeHearts position="bottom-left" type={1} />
                 <h3>Тайминг</h3>
                 <div className="timeline-list">
                     {[
@@ -163,6 +270,7 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
 
             {/* Детали */}
             <motion.section className="section details-section" variants={fadeInUp}>
+                <DecorativeHearts position="top-right" type={2} />
                 <h3>Детали</h3>
                 <p>Дорогие гости, пожалуйста не обременяйте себя выбором цветов и подарков, 
                 будем благодарны за вклад в бюджет нашей молодой семьи, который поможет 
@@ -172,14 +280,34 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
                     <li>Также там будет удобный способ перевода средств в день торжества — QR-код</li>
                     <li>А после мероприятия будем рады получить от вас все фото и видео с этого торжества</li>
                 </ul>
-                <a 
-                    href="https://t.me/your_channel" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="next-btn telegram-btn"
+                
+                <motion.div 
+                    className="telegram-btn-wrapper"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
                 >
-                    Telegram
-                </a>
+                    {/* Изображение ириса поверх кнопки */}
+                    <motion.img 
+                        src="/images/iris.jpg" 
+                        alt="✦" 
+                        className="iris-overlay"
+                        initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2, type: "spring", stiffness: 200 }}
+                    />
+                    
+                    <a 
+                        href="https://t.me/+rIEcxORGx7xiNWNi" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="next-btn telegram-btn"
+                    >
+                        Telegram
+                    </a>
+                </motion.div>
             </motion.section>
 
             {/* Анкета гостя */}
@@ -194,6 +322,10 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
 
             {/* Завершающий блок */}
             <motion.section className="section closing-section" variants={fadeInUp}>
+                
+                <DecorativeHearts position="top-right" type={2} />
+                <DecorativeHearts position="left" type={3} />
+                <DecorativeHearts position="right" type={1} />
                 <p className="closing-text">
                     До скорой встречи !<br />
                     С любовью,<br />

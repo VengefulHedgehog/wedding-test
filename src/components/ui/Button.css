@@ -14,11 +14,6 @@
     border-radius: 50%;
 }
 
-.next-btn:hover,
-.back-btn:hover {
-    background: #c49595;
-}
-
 .back-btn {
     background: transparent;
     color: var(--primary);
