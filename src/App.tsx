@@ -54,7 +54,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="app">
+    <div className={`app ${step === 0 ? 'app--welcome' : ''}`}>
       <AnimatePresence mode="wait">
         {step === 0 && (
           <motion.div

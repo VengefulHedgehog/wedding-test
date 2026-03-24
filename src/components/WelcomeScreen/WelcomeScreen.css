@@ -81,6 +81,7 @@
 }
 
 @media (max-width: 600px) {
+  
   .welcome-header {
     padding: 40px 60px !important;
   }
