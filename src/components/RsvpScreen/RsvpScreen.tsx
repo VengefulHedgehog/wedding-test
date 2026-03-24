@@ -69,13 +69,11 @@ export default function RsvpScreen({ onBack }: RsvpScreenProps) {
     }
     
     setStatus('loading');
-    setStatusMessage('⏳ Отправка...');
 
     try {
       await submitToGoogleSheets(formData);
       
       setStatus('success');
-      setStatusMessage('Спасибо! Ваш ответ сохранён 💕');
       setFormData({ name: '', attendance: [], allergies: '', alcohol: [] });
       
       // Убрали setTimeout для сброса статуса в 'idle' при успехе,
@@ -194,7 +192,7 @@ export default function RsvpScreen({ onBack }: RsvpScreenProps) {
             {status === 'loading' 
               ? '⏳ Отправка...' 
               : status === 'success' 
-                ? 'Спасибо, ваш ответ сохранён' 
+                ? 'Спасибо, ваш ответ сохранён 💕' 
                 : 'Отправить ответ'}
           </button>
         </form>

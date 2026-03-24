@@ -305,7 +305,7 @@ export default function DetailsScreen({ onNext }: DetailsScreenProps) {
                         rel="noopener noreferrer"
                         className="next-btn telegram-btn"
                     >
-                        Telegram
+                        Telegrаm
                     </a>
                 </motion.div>
             </motion.section>

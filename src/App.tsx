@@ -13,7 +13,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Предзагрузка изображений при монтировании компонента
     preloadImages()
       .then((result) => {
         if (result.failed.length > 0) {

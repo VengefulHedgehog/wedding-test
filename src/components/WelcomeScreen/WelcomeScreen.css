@@ -35,7 +35,7 @@
 /* Фоновое изображение */
 .image-bg {
   position: absolute;
-  overflow: visible;
+  overflow: visible !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
