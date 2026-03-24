@@ -16,14 +16,11 @@ function App() {
     // Предзагрузка изображений при монтировании компонента
     preloadImages()
       .then((result) => {
-        console.log('Images preloaded:', result.loaded.length);
         if (result.failed.length > 0) {
-          console.warn('Failed to preload images:', result.failed);
         }
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error preloading images:', error);
         setIsLoading(false);
       });
   }, []);
@@ -41,6 +38,11 @@ function App() {
       <div className="app loading-screen">
         <div className="loading-content">
           <div className="loading-spinner"></div>
+            <img 
+              src="/images/heart.jpg" 
+              alt="♥" 
+              className="loading-heart"
+          />
         </div>
       </div>
     );
