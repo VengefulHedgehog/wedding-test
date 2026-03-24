@@ -32,6 +32,14 @@ body {
   line-height: 1.6;
 }
 
+@media (max-width: 600px) {
+  .derma{
+    width: 100%;
+  }
+  .app{
+    padding: 0 !important;
+  }
+}
 .container {
   max-width: 800px;
   margin: 0 auto;

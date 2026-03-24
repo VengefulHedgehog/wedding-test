@@ -76,8 +76,6 @@ export default function RsvpScreen({ onBack }: RsvpScreenProps) {
       setStatus('success');
       setFormData({ name: '', attendance: [], allergies: '', alcohol: [] });
       
-      // Убрали setTimeout для сброса статуса в 'idle' при успехе,
-      // чтобы кнопка оставалась отключенной и показывала сообщение
     } catch (error) {
       console.error('Ошибка:', error);
       setStatus('error');

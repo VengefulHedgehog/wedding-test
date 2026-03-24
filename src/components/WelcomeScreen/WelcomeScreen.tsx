@@ -76,10 +76,11 @@ export default function WelcomeScreen({ onNext }: WelcomeScreenProps) {
                 />
             </motion.div>
             
-            {/* Текст для разных устройств */}
-            <div className="next-btn" role="button" aria-label="Коснитесь экрана для просмотра">
-                <span className="text-desktop">Для просмотра кликните сюда</span>
-                <span className="text-mobile">Для просмотра коснитесь экрана</span>
+            <div className="btn-help">
+                <div className="next-btn" role="button" aria-label="Коснитесь экрана для просмотра">
+                    <span className="text-desktop">Для просмотра кликните сюда</span>
+                    <span className="text-mobile">Для просмотра коснитесь экрана</span>
+                </div>
             </div>
         </motion.div>
     );
