@@ -23,7 +23,13 @@ function App() {
         setIsLoading(false);
       });
   }, []);
-
+useEffect(() => {
+  if (step === 2) {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  }
+}, [step]);
   const handleNext = () => {
     setStep((prev) => Math.min(prev + 1, 2) as Step);
   };
