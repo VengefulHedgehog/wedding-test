@@ -27,7 +27,7 @@ useEffect(() => {
   if (step === 2) {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    }, 1000);
   }
 }, [step]);
   const handleNext = () => {
